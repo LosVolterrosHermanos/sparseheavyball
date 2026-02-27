@@ -47,9 +47,31 @@ MPLBACKEND=Agg MPLCONFIGDIR=/tmp/mpl python simulations/run_last_iter_risk_heatm
   --out-csv simulations/outputs/readme_sample_grid.csv
 ```
 
+Generate a sample efficiency heatmap (sample-timescale):
+
+```bash
+MPLBACKEND=Agg MPLCONFIGDIR=/tmp/mpl python simulations/run_last_iter_risk_heatmap.py \
+  --d 2000 \
+  --sigma 1.2 \
+  --time 24 \
+  --time-rule sample \
+  --search-factor 1.1 \
+  --binary-search-steps 6 \
+  --max-dyadic-steps 20 \
+  --grid-fineness 31 \
+  --num-workers 8 \
+  --figure-title "README sample: Sample Efficiency" \
+  --out-heatmaps simulations/outputs/readme_sample_efficiency_heatmap.png \
+  --out-eta-scaled /tmp/readme_sample_efficiency_eta_scaled.png \
+  --out-csv /tmp/readme_sample_efficiency_grid.csv
+```
+
 ## Sample Output
 
 `simulations/outputs/readme_sample_heatmap.png`
 
 ![README sample heatmap](simulations/outputs/readme_sample_heatmap.png)
 
+`simulations/outputs/readme_sample_efficiency_heatmap.png`
+
+![README sample efficiency heatmap](simulations/outputs/readme_sample_efficiency_heatmap.png)
