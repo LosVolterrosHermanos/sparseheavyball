@@ -22,6 +22,12 @@ Lightweight simulation workspace for sparse-momentum ODE scaling studies.
 - `simulations/export_last_iter_split_heatmaps.py`  
   Exports standalone optimal-LR and last-iterate-risk heatmaps from a CSV grid.
 
+- `simulations/run_critical_incoherent_boundary_verification.py`  
+  Verification script for the critical incoherent boundary regime (\(\kappa=\sigma,\ 0<\gamma<1\)).
+
+- `simulations/run_triple_point_verification.py`  
+  Verification script for the triple-point 3D regime (\(\kappa=\sigma,\ \gamma=1\)).
+
 ## Quick Start
 
 ```bash
@@ -66,6 +72,56 @@ MPLBACKEND=Agg MPLCONFIGDIR=/tmp/mpl python simulations/run_last_iter_risk_heatm
   --out-csv /tmp/readme_sample_efficiency_grid.csv
 ```
 
+Critical incoherent-boundary verification MWE:
+
+```bash
+MPLBACKEND=Agg MPLCONFIGDIR=/tmp/mpl python simulations/run_critical_incoherent_boundary_verification.py \
+  --d 1000 \
+  --sigma 1.2 \
+  --gamma 0.6 \
+  --eta-star 0.2 \
+  --B-star 1.0 \
+  --p-star-list 0.6 0.8 1.0 1.2 1.4 \
+  --tau-max 12 \
+  --out-png simulations/outputs/critical_incoherent_boundary_verification.png \
+  --out-csv /tmp/critical_incoherent_boundary_verification_metrics.csv
+```
+
+Triple-point verification MWE (physical raw init \([R,V,C]=[1,0,0]\)):
+
+```bash
+MPLBACKEND=Agg MPLCONFIGDIR=/tmp/mpl python simulations/run_triple_point_verification.py \
+  --d 1000 \
+  --sigma 1.2 \
+  --eta-star 0.2 \
+  --eps-star 1.0 \
+  --B-star 1.0 \
+  --init-mode raw \
+  --raw-init 1.0 0.0 0.0 \
+  --p-star-list 0.6 0.8 1.0 1.2 1.4 \
+  --tau-max 12 \
+  --out-png simulations/outputs/triple_point_verification.png \
+  --out-csv /tmp/triple_point_verification_metrics.csv
+```
+
+Triple-point resonant MWE (near-critical oscillatory behavior):
+
+```bash
+MPLBACKEND=Agg MPLCONFIGDIR=/tmp/mpl python simulations/run_triple_point_verification.py \
+  --d 1000 \
+  --sigma 1.2 \
+  --eta-star 1.5 \
+  --eps-star 0.03 \
+  --B-star 1.0 \
+  --init-mode raw \
+  --raw-init 1.0 0.0 0.0 \
+  --p-star-list 0.8 1.0 1.2 \
+  --tau-max 140 \
+  --steps-per-tau 600 \
+  --out-png simulations/outputs/triple_point_verification_resonant.png \
+  --out-csv /tmp/triple_point_verification_resonant_metrics.csv
+```
+
 ## Sample Output
 
 `simulations/outputs/readme_sample_heatmap.png`
@@ -75,3 +131,15 @@ MPLBACKEND=Agg MPLCONFIGDIR=/tmp/mpl python simulations/run_last_iter_risk_heatm
 `simulations/outputs/readme_sample_efficiency_heatmap.png`
 
 ![README sample efficiency heatmap](simulations/outputs/readme_sample_efficiency_heatmap.png)
+
+`simulations/outputs/critical_incoherent_boundary_verification.png`
+
+![Critical incoherent boundary verification](simulations/outputs/critical_incoherent_boundary_verification.png)
+
+`simulations/outputs/triple_point_verification.png`
+
+![Triple-point verification](simulations/outputs/triple_point_verification.png)
+
+`simulations/outputs/triple_point_verification_resonant.png`
+
+![Triple-point resonant verification](simulations/outputs/triple_point_verification_resonant.png)
