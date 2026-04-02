@@ -28,6 +28,10 @@ Lightweight simulation workspace for sparse-momentum ODE scaling studies.
 - `simulations/run_triple_point_verification.py`  
   Verification script for the triple-point 3D regime (\(\kappa=\sigma,\ \gamma=1\)).
 
+- `logistic/`  
+  Five-variable ODE for logistic regression on a rare-event classification problem.
+  Validation scripts and hyperparameter sweeps. See `logistic/README.md`.
+
 ## Quick Start
 
 ```bash
